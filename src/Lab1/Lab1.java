@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static Lab1.Util.CSVDataReader.readDataFromCSV;
+import static Lab1.Util.StudentNameGenerator.returnStudentNames;
+import static Lab1.Util.TeacherNameGenerator.returnTeacherNames;
 
 public class Lab1 {
     public static void main(String[] args) {
@@ -47,15 +49,10 @@ public class Lab1 {
 //        displayBooks(student.getBooks());
 //        System.out.println("\nTeacher " + teacher + " has the following books:");
 //        displayBooks(teacher.getBooks());
-        try {
-            List<String> names = readDataFromCSV(System.getProperty("user.dir") + "/src/Lab1/names.csv");
-            List<String> surnames = readDataFromCSV(System.getProperty("user.dir") + "/src/Lab1/surnames.csv");
-            System.out.println("Names: " + names);
-            System.out.println("Surnames: " + surnames);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
+
+        System.out.println(returnStudentNames());
+        System.out.println(returnTeacherNames());
     }
 
     // Метод для отображения информации о книгах
