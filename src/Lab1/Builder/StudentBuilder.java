@@ -17,8 +17,10 @@ public class StudentBuilder extends UserBuilder {
     public void addBooks(BookFactory bookFactory) {
         Random random = new Random();
         int numBooks = random.nextInt(8) + 3;
+        String[] bookTypes = {"Educational", "Fiction"}; // Возможные типы книг
         for (int i = 0; i < numBooks; i++) {
-            user.takeBook(bookFactory.createBook("Book Title " + (i + 1)));
+            String randomType = bookTypes[random.nextInt(bookTypes.length)]; // Выбираем случайный тип книги
+            user.takeBook(bookFactory.createBook("Book Title " + (i + 1), randomType));
         }
     }
 }
