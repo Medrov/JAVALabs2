@@ -11,39 +11,51 @@ import Lab1.Model.Library;
 import Lab1.Model.Student;
 import Lab1.Model.Teacher;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static Lab1.Util.CSVDataReader.readDataFromCSV;
+
 public class Lab1 {
     public static void main(String[] args) {
-        // Создание библиотеки
-        Library library = new Library();
+//        // Создание библиотеки
+//        Library library = new Library();
+//
+//        // Создание фабрик книг
+//        BookFactory englishBookFactory = new EnglishBookFactory();
+//        BookFactory russianBookFactory = new RussianBookFactory();
+//
+//        // Создание строителей пользователей
+//        UserBuilder studentBuilder = new StudentBuilder("John");
+//        UserBuilder teacherBuilder = new TeacherBuilder("Jane");
+//
+//        // Создание студента и добавление книг
+//        studentBuilder.createUser();
+//        studentBuilder.addBooks(englishBookFactory);
+//        studentBuilder.addBooks(russianBookFactory);
+//        Student student = (Student) studentBuilder.getUser();
+//
+//        // Создание учителя и добавление книг
+//        teacherBuilder.createUser();
+//        teacherBuilder.addBooks(englishBookFactory);
+//        teacherBuilder.addBooks(russianBookFactory);
+//        Teacher teacher = (Teacher) teacherBuilder.getUser();
+//
+//        // Вывод информации о книгах у студента и учителя
+//        System.out.println("Student " + student + " has the following books:");
+//        displayBooks(student.getBooks());
+//        System.out.println("\nTeacher " + teacher + " has the following books:");
+//        displayBooks(teacher.getBooks());
+        try {
+            List<String> names = readDataFromCSV(System.getProperty("user.dir") + "/src/Lab1/names.csv");
+            List<String> surnames = readDataFromCSV(System.getProperty("user.dir") + "/src/Lab1/surnames.csv");
+            System.out.println("Names: " + names);
+            System.out.println("Surnames: " + surnames);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        // Создание фабрик книг
-        BookFactory englishBookFactory = new EnglishBookFactory();
-        BookFactory russianBookFactory = new RussianBookFactory();
-
-        // Создание строителей пользователей
-        UserBuilder studentBuilder = new StudentBuilder("John");
-        UserBuilder teacherBuilder = new TeacherBuilder("Jane");
-
-        // Создание студента и добавление книг
-        studentBuilder.createUser();
-        studentBuilder.addBooks(englishBookFactory);
-        studentBuilder.addBooks(russianBookFactory);
-        Student student = (Student) studentBuilder.getUser();
-
-        // Создание учителя и добавление книг
-        teacherBuilder.createUser();
-        teacherBuilder.addBooks(englishBookFactory);
-        teacherBuilder.addBooks(russianBookFactory);
-        Teacher teacher = (Teacher) teacherBuilder.getUser();
-
-        // Вывод информации о книгах у студента и учителя
-        System.out.println("Student " + student + " has the following books:");
-        displayBooks(student.getBooks());
-        System.out.println("\nTeacher " + teacher + " has the following books:");
-        displayBooks(teacher.getBooks());
     }
 
     // Метод для отображения информации о книгах
