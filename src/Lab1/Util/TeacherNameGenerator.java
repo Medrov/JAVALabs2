@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static Lab1.Util.NameGenderDictionary.*;
 
 public class TeacherNameGenerator {
     private static final String NAMES_FILE_PATH = System.getProperty("user.dir") + "/src/Lab1/names1.csv";
@@ -55,7 +54,7 @@ public class TeacherNameGenerator {
     public static List<String> generatePatronyms(List<String> names) {
         List<String> patronyms = new ArrayList<>();
         for (String name : names) {
-            patronyms.add(name + " " + getName(name));
+            patronyms.add(name + " ");
         }
         return patronyms;
     }

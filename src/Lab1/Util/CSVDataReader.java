@@ -69,4 +69,17 @@ public class CSVDataReader {
         }
         return data.get(index);
     }
+
+    public static List<String> getDiscipline(String filePath) throws IOException {
+        List<String> data = new ArrayList<>();
+        try (CSVReader reader = new CSVReader(new FileReader(filePath))) {
+            String[] nextRecord;
+            while ((nextRecord = reader.readNext()) != null) {
+                data.add(nextRecord[0]);
+            }
+        } catch (CsvValidationException e) {
+            throw new RuntimeException(e);
+        }
+        return data;
+    }
 }

@@ -1,22 +1,7 @@
 package Lab1;
 
-import Lab1.AbstractFactory.BookFactory;
-import Lab1.AbstractFactory.EnglishBookFactory;
-import Lab1.AbstractFactory.RussianBookFactory;
-import Lab1.Builder.StudentBuilder;
-import Lab1.Builder.TeacherBuilder;
-import Lab1.Builder.UserBuilder;
-import Lab1.Model.Book;
-import Lab1.Model.Library;
-import Lab1.Model.Student;
-import Lab1.Model.Teacher;
-
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-import static Lab1.Util.CSVDataReader.readDataFromCSV;
-import static Lab1.Util.StudentNameGenerator.returnStudentNames;
 import static Lab1.Util.TeacherNameGenerator.returnTeacherNames;
 
 public class Lab1 {

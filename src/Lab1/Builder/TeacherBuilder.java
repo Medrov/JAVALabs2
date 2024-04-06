@@ -5,22 +5,27 @@ import Lab1.Model.Teacher;
 
 import java.util.Random;
 
-public class TeacherBuilder extends UserBuilder {
-    public TeacherBuilder(String name) {
-        super(name);
+public class TeacherBuilder{
+    private String name;
+    private String surname;
+    private String patronymic;
+
+    public TeacherBuilder setName(String name) {
+        this.name = name;
+        return this;
     }
 
-    public void createUser() {
-        user = new Teacher(name);
+    public TeacherBuilder setSurname(String surname) {
+        this.surname = surname;
+        return this;
     }
 
-    public void addBooks(BookFactory bookFactory) {
-        Random random = new Random();
-        int numBooks = random.nextInt(8) + 3;
-        String[] bookTypes = {"Educational", "Fiction"}; // Возможные типы книг
-        for (int i = 0; i < numBooks; i++) {
-            String randomType = bookTypes[random.nextInt(bookTypes.length)]; // Выбираем случайный тип книги
-            user.takeBook(bookFactory.createBook("Book Title " + (i + 1), randomType));
-        }
+    public TeacherBuilder setPatronymic(String patronymic) {
+        this.patronymic = patronymic;
+        return this;
+    }
+
+    public Teacher build() {
+        return new Teacher(name, patronymic, surname);
     }
 }
