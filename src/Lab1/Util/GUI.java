@@ -1,5 +1,7 @@
 package Lab1.Util;
 
+import Lab1.Model.User;
+
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
@@ -10,14 +12,14 @@ public class GUI extends JFrame {
         DefaultMutableTreeNode professorNode = new DefaultMutableTreeNode("Профессоры");
         DefaultMutableTreeNode studentNode = new DefaultMutableTreeNode("Студенты");
 
-//        Customer[] customers = Generator.generateCustomers(20);
-//        DefaultMutableTreeNode[] customerNodes = new DefaultMutableTreeNode[customers.length];
-//        for (int i = 0; i < customers.length; i++) {
-//            customerNodes[i] = customers[i].createNode();
-//            if (customers[i].isProfessor()) {
-//                professorNode.add(customerNodes[i]);
-//            } else studentNode.add(customerNodes[i]);
-//        }
+        User[] users = Generator.generateUsers(45);
+        DefaultMutableTreeNode[] userNodes = new DefaultMutableTreeNode[users.length];
+        for (int i = 0; i < users.length; i++) {
+            userNodes[i] = users[i].createNode();
+            if (users[i].isTeacher()) {
+                professorNode.add(userNodes[i]);
+            } else studentNode.add(userNodes[i]);
+        }
         root.add(professorNode);
         root.add(studentNode);
 

@@ -10,4 +10,9 @@ public class Teacher extends User {
     public String getString() {
         return name + " " + patronymic + " " + surname;
     }
+
+    @Override
+    public boolean isTeacher() {
+        return true;
+    }
 }

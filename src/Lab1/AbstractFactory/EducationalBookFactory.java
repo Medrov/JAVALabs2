@@ -7,6 +7,7 @@ import Lab1.Model.Book.EnglishBook;
 import Lab1.Model.Book.RussianBook;
 import Lab1.Util.CSVDataReader;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
@@ -16,7 +17,11 @@ public class EducationalBookFactory implements BookFactory {
     private static EducationalBookFactory INSTANCE;
 
     private EducationalBookFactory() {
-        disciplinesList = CSVDataReader.readDataFromCSV("Lab1/data/disciplines.csv");
+        try {
+            disciplinesList = CSVDataReader.readDataFromCSV(System.getProperty("user.dir") + "/src/Lab1/Data/disciplines.csv");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static EducationalBookFactory getInstance() {

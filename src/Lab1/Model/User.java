@@ -51,5 +51,5 @@ public abstract class User {
         return name + " " + surname;
     }
 
-//    public abstract boolean isProfessor();
+    public abstract boolean isTeacher();
 }

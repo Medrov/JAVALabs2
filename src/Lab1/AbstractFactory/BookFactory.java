@@ -5,6 +5,5 @@ import Lab1.Model.Book.RussianBook;
 
 public interface BookFactory {
     RussianBook createRussianBook();
-
     EnglishBook createEnglishBook();
 }

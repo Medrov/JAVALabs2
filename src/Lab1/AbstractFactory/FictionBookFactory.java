@@ -6,6 +6,7 @@ import Lab1.Model.Book.Fiction.FictionRussianBook;
 import Lab1.Model.Book.RussianBook;
 import Lab1.Util.CSVDataReader;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
@@ -13,13 +14,17 @@ import static java.lang.Integer.parseInt;
 
 public class FictionBookFactory implements BookFactory {
 
-    private final List<String[]> englishFictionList;
-    private final List<String[]> russianFictionList;
+    private List<String[]> englishFictionList;
+    private List<String[]> russianFictionList;
     private static FictionBookFactory INSTANCE;
 
     private FictionBookFactory() {
-        russianFictionList = CSVDataReader.readDataFromCSV("Lab1/data/russian_fiction.csv", false, false, false);
-        englishFictionList = CSVDataReader.readDataFromCSV("Lab1/data/english_fiction.csv", false, false, false);
+        try {
+            russianFictionList = CSVDataReader.readDataFromCSV(System.getProperty("user.dir") + "/src/Lab1/Data/russian_fiction.csv");
+            englishFictionList = CSVDataReader.readDataFromCSV(System.getProperty("user.dir") + "/src/Lab1/Data/english_fiction.csv");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static FictionBookFactory getInstance() {
