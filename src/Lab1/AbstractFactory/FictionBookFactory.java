@@ -16,9 +16,8 @@ public class FictionBookFactory implements BookFactory {
 
     private List<String[]> englishFictionBooks;
     private List<String[]> russianFictionBooks;
-    private static FictionBookFactory INSTANCE;
 
-    private FictionBookFactory() {
+    public FictionBookFactory() {
         try {
             russianFictionBooks = CSVDataReader.readDataFromCSV(System.getProperty("user.dir") + "/src/Lab1/Data/russian_fiction.csv");
             englishFictionBooks = CSVDataReader.readDataFromCSV(System.getProperty("user.dir") + "/src/Lab1/Data/english_fiction.csv");
@@ -26,14 +25,6 @@ public class FictionBookFactory implements BookFactory {
             throw new RuntimeException(e);
         }
     }
-
-    public static FictionBookFactory getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new FictionBookFactory();
-        }
-        return INSTANCE;
-    }
-
 
     @Override
     public RussianBook createRussianBook() {

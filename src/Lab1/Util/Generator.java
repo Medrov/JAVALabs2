@@ -14,27 +14,32 @@ public class Generator {
 
     private static Set<EnglishBook> returnSetOfEnglishBooks() {
         Set<EnglishBook> books = new HashSet<>();
+        EducationalBookFactory eduBookFactory = new EducationalBookFactory();
+        FictionBookFactory fictionBookFactory = new FictionBookFactory();
         for (int i = 0; i < 60; i++) {
-            books.add(random.nextBoolean() ? EducationalBookFactory.getInstance().createEnglishBook() :
-                    FictionBookFactory.getInstance().createEnglishBook());
+            books.add(random.nextBoolean() ? eduBookFactory.createEnglishBook() :
+                    fictionBookFactory.createEnglishBook());
         }
         return books;
     }
 
     private static Set<RussianBook> returnSetOfRussianBooks() {
         Set<RussianBook> books = new HashSet<>();
+        EducationalBookFactory eduBookFactory = new EducationalBookFactory();
+        FictionBookFactory fictionBookFactory = new FictionBookFactory();
         for (int i = 0; i < 60; i++) {
-            books.add(random.nextBoolean() ? FictionBookFactory.getInstance().createRussianBook() :
-                    EducationalBookFactory.getInstance().createRussianBook());
+            books.add(random.nextBoolean() ? fictionBookFactory.createRussianBook() :
+                    eduBookFactory.createRussianBook());
         }
         return books;
     }
 
     private static List<User> returnListOfUsers(int numberOfUsers) {
         List<User> users = new ArrayList<>();
+        UserFactory userFactory = new UserFactory();
         for (int i = 0; i < numberOfUsers; i++) {
-            users.add(random.nextBoolean() ? UserFactory.getInstance().createUser("Teacher") :
-                    UserFactory.getInstance().createUser("Student"));
+            users.add(random.nextBoolean() ? userFactory .createUser("Teacher") :
+                    userFactory.createUser("Student"));
         }
         return users;
     }

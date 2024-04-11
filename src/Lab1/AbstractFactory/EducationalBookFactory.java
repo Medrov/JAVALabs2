@@ -14,9 +14,8 @@ import java.util.Random;
 public class EducationalBookFactory implements BookFactory {
 
     List<String[]> disciplines;
-    private static EducationalBookFactory INSTANCE;
 
-    private EducationalBookFactory() {
+    public EducationalBookFactory() {
         try {
             disciplines = CSVDataReader.readDataFromCSV(System.getProperty("user.dir") + "/src/Lab1/Data/disciplines.csv");
         } catch (IOException e) {
@@ -24,12 +23,6 @@ public class EducationalBookFactory implements BookFactory {
         }
     }
 
-    public static EducationalBookFactory getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new EducationalBookFactory();
-        }
-        return INSTANCE;
-    }
 
     @Override
     public RussianBook createRussianBook() {
