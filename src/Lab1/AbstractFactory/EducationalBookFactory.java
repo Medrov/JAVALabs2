@@ -13,12 +13,12 @@ import java.util.Random;
 
 public class EducationalBookFactory implements BookFactory {
 
-    List<String[]> disciplinesList;
+    List<String[]> disciplines;
     private static EducationalBookFactory INSTANCE;
 
     private EducationalBookFactory() {
         try {
-            disciplinesList = CSVDataReader.readDataFromCSV(System.getProperty("user.dir") + "/src/Lab1/Data/disciplines.csv");
+            disciplines = CSVDataReader.readDataFromCSV(System.getProperty("user.dir") + "/src/Lab1/Data/disciplines.csv");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -33,13 +33,11 @@ public class EducationalBookFactory implements BookFactory {
 
     @Override
     public RussianBook createRussianBook() {
-        String[] types = {
-                "Задачник", "Учебник", "Пособие"
-        };
+        String[] types = {"Задачник", "Учебник", "Пособие"};
         Random r = new Random();
         String type = types[r.nextInt(types.length - 1)];
         int edition = r.nextInt(3) + 1;
-        return new EducationalRussianBook(type, edition, disciplinesList.get(3)[r.nextInt(disciplinesList.get(3).length - 1)]);
+        return new EducationalRussianBook(type, edition, disciplines.get(3)[r.nextInt(disciplines.get(3).length - 1)]);
     }
 
     @Override
@@ -48,9 +46,9 @@ public class EducationalBookFactory implements BookFactory {
         boolean isBachelor = r.nextBoolean();
         int year = r.nextInt(1950, 2024);
         String author, university, discipline;
-        discipline = disciplinesList.get(0)[r.nextInt(disciplinesList.get(0).length - 1)];
-        author = disciplinesList.get(1)[r.nextInt(disciplinesList.get(1).length - 1)];
-        university = disciplinesList.get(2)[r.nextInt(disciplinesList.get(2).length - 1)];
+        discipline = disciplines.get(0)[r.nextInt(disciplines.get(0).length - 1)];
+        author = disciplines.get(1)[r.nextInt(disciplines.get(1).length - 1)];
+        university = disciplines.get(2)[r.nextInt(disciplines.get(2).length - 1)];
         return new EducationalEnglishBook(author, year, discipline, university, isBachelor);
     }
 }

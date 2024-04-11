@@ -9,7 +9,7 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 public class GUI extends JFrame {
     public GUI() {
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("Root");
-        DefaultMutableTreeNode professorNode = new DefaultMutableTreeNode("Профессоры");
+        DefaultMutableTreeNode professorNode = new DefaultMutableTreeNode("Учителя");
         DefaultMutableTreeNode studentNode = new DefaultMutableTreeNode("Студенты");
 
         User[] users = Generator.generateUsers(45);

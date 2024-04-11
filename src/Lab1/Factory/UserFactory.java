@@ -12,16 +12,16 @@ import java.util.Random;
 
 public class UserFactory {
     private static UserFactory INSTANCE;
-    private List<String[]> listOfNames;
-    private List<String[]> listOfSurnames;
-    private List<String[]> listOfTeacherSurnames;
+    private List<String[]> names;
+    private List<String[]> surnames;
+    private List<String[]> teachersSurnames;
 
 
     private UserFactory() {
         try {
-            listOfTeacherSurnames = CSVDataReader.readDataFromCSV(System.getProperty("user.dir") + "/src/Lab1/Data/professor_surnames.csv");
-            listOfNames = CSVDataReader.readDataFromCSV(System.getProperty("user.dir") + "/src/Lab1/Data/names.csv");
-            listOfSurnames = CSVDataReader.readDataFromCSV(System.getProperty("user.dir") + "/src/Lab1/Data/surnames.csv");
+            teachersSurnames = CSVDataReader.readDataFromCSV(System.getProperty("user.dir") + "/src/Lab1/Data/professor_surnames.csv");
+            names = CSVDataReader.readDataFromCSV(System.getProperty("user.dir") + "/src/Lab1/Data/names.csv");
+            surnames = CSVDataReader.readDataFromCSV(System.getProperty("user.dir") + "/src/Lab1/Data/surnames.csv");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -35,11 +35,18 @@ public class UserFactory {
     }
 
     public User createUser(String type) {
-        return switch (type) {
-            case "Teacher" -> createTeacher(listOfNames, listOfTeacherSurnames);
-            case "Student" -> createStudent(listOfNames, listOfSurnames);
-            default -> null;
-        };
+        User result = null;
+        switch (type) {
+            case "Teacher":
+                result = createTeacher(names, teachersSurnames);
+                break;
+            case "Student":
+                result = createStudent(names, surnames);
+                break;
+            default:
+                break;
+        }
+        return result;
     }
 
     private User createTeacher(List<String[]> listOfNames, List<String[]> listOfSurnames) {
