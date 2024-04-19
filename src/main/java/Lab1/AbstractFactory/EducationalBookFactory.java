@@ -16,7 +16,7 @@ public class EducationalBookFactory implements BookFactory {
     List<String[]> disciplinesList;
     private static EducationalBookFactory INSTANCE;
 
-    private EducationalBookFactory() {
+    public EducationalBookFactory() {
         try {
             disciplinesList = CSVDataReader.readDataFromCSV(System.getProperty("user.dir") + "/src/Lab1/Data/disciplines.csv");
         } catch (IOException e) {

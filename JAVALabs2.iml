@@ -10,5 +10,6 @@
     <orderEntry type="library" name="opencsv" level="project" />
     <orderEntry type="library" name="apache.poi.ooxml" level="project" />
     <orderEntry type="library" name="formdev.flatlaf" level="project" />
+    <orderEntry type="library" name="springframework.boot.spring.starter.log4j2" level="project" />
   </component>
 </module>
