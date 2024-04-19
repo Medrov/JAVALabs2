@@ -11,11 +11,11 @@ public class ExcelManager {
     ExcelHandler handler = new ExcelHandler();
 
     public void Import(File file, String which, boolean a) throws IOException, FileNotFoundException, InvalidFormatException{
-        Repository.getInstance().setMatrix(handler.readExcel(file,which,a));
+        Repository.getInstance().setMatrix(handler.readXSLX(file,which,a));
     }
 
     public void Export() throws IOException{
-        handler.writeExcel(Repository.getInstance().getMatrix());
+        handler.writeXSLX(Repository.getInstance().getMatrix());
     }
 
     public void Calculate(){

@@ -9,7 +9,7 @@ import java.io.*;
 
 public class ExcelHandler {
 
-    public double[][] readExcel(File file, String which, boolean a) throws IOException, InvalidFormatException {
+    public double[][] readXSLX(File file, String which, boolean a) throws IOException, InvalidFormatException {
         Workbook workbook = null;
         try {
             workbook = WorkbookFactory.create(file);
@@ -57,7 +57,7 @@ public class ExcelHandler {
         return data;
     }
 
-    public void writeExcel(double[][] mas) throws IOException {
+    public void writeXSLX(double[][] mas) throws IOException {
         Workbook workbook = new XSSFWorkbook();
         Sheet mainSheet = workbook.createSheet("Полученные значения");
         Sheet covarianceSheet = workbook.createSheet("Матрица ковариации");

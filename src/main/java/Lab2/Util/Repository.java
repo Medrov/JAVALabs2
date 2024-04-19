@@ -38,12 +38,12 @@ public class Repository {
         parameters = new double[NUM_STATISTICS][matrix.length];
         for (int i = 0; i < NUM_STATISTICS; i++) {
             for (int j = 0; j < matrix.length; j++) {
-                parameters[i][j] = Decider(i, j, matrix);
+                parameters[i][j] = decider(i, j, matrix);
             }
         }
     }
 
-    public double Decider(int i, int j, double[][] matrix) {
+    public double decider(int i, int j, double[][] matrix) {
         switch (i) {
             case 0:
                 return Calculator.getGeometricMean(matrix[j]);
