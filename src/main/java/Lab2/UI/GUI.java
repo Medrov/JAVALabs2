@@ -1,6 +1,6 @@
 package main.java.Lab2.UI;
 
-import main.java.Lab2.Util.Manager;
+import main.java.Lab2.Util.ExcelManager;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 import javax.swing.*;
@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 public class GUI extends javax.swing.JFrame {
 
-    Manager manager = new Manager();
+    ExcelManager manager = new ExcelManager();
 
     public GUI() {
         initComponents();

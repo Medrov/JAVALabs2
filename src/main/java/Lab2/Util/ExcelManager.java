@@ -7,15 +7,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class Manager {
-    ExcelHandler provider = new ExcelHandler();
+public class ExcelManager {
+    ExcelHandler handler = new ExcelHandler();
 
     public void Import(File file, String which, boolean a) throws IOException, FileNotFoundException, InvalidFormatException{
-        Repository.getInstance().setMas(provider.readExcel(file,which,a));
+        Repository.getInstance().setMatrix(handler.readExcel(file,which,a));
     }
 
     public void Export() throws IOException{
-        provider.writeExcel(Repository.getInstance().getMas());
+        handler.writeExcel(Repository.getInstance().getMatrix());
     }
 
     public void Calculate(){

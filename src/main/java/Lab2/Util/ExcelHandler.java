@@ -17,7 +17,6 @@ public class ExcelHandler {
             System.out.println("Ошибка при чтении Excel файла: " + e.getMessage());
             return null;
         }
-
         Sheet sheet;
         if (a) {
             try {
@@ -41,7 +40,6 @@ public class ExcelHandler {
         for (int i = 0; i < numRows; i++) {
             numCols = Math.max(numCols, sheet.getRow(i).getLastCellNum());
         }
-
         double[][] data = new double[numCols][numRows];
         for (int i = 0; i < numRows; i++) {
             Row row = sheet.getRow(i);
@@ -61,10 +59,37 @@ public class ExcelHandler {
 
     public void writeExcel(double[][] mas) throws IOException {
         Workbook workbook = new XSSFWorkbook();
-        Sheet sheet = workbook.createSheet("Полученные значения");
-        // Запись данных в таблицу
-        // (пропущено для краткости)
-        try (FileOutputStream fileOut = new FileOutputStream("краб.xlsx")) {
+        Sheet mainSheet = workbook.createSheet("Полученные значения");
+        Sheet covarianceSheet = workbook.createSheet("Матрица ковариации");
+
+        String[] statNames = {"Среднее геометрическое", "Среднее арифметическое", "Оценка стандартного отклонения", "Размах", "Коэффициент ковариации с последующей выборкой", "Количество элементов",
+                "Нижняя граница доверительного интервала", "Верхняя граница доверительного интервала", "Оценка дисперсии", "Максимум", "Минимум"};
+
+        for (int i = 0; i < statNames.length; i++) {
+            Row row = mainSheet.createRow(i);
+            for (int j = 0; j < mas.length; j++) {
+                Cell nameCell = row.createCell(j * 2);
+                nameCell.setCellValue(statNames[i] + " для " + (j + 1) + "-й выборки: ");
+
+                Cell valueCell = row.createCell(j * 2 + 1);
+                valueCell.setCellValue((Repository.getInstance().getParameters())[i][j]);
+            }
+        }
+
+        for (int i = 0; i < mas.length; i++) {
+            Row headerRow = covarianceSheet.createRow(0);
+            headerRow.createCell(i + 1).setCellValue("Выборка " + (i + 1));
+
+            for (int j = 0; j < mas.length; j++) {
+                if (i == 0) {
+                    Row sampleRow = covarianceSheet.createRow(j + 1);
+                    sampleRow.createCell(0).setCellValue("Выборка " + (j + 1));
+                }
+                covarianceSheet.getRow(j + 1).createCell(i + 1).setCellValue(Repository.getInstance().getCov(i, j));
+            }
+        }
+
+        try (FileOutputStream fileOut = new FileOutputStream("test.xlsx")) {
             workbook.write(fileOut);
             System.out.println("Параметры успешно экспортированы");
         } catch (IOException e) {
