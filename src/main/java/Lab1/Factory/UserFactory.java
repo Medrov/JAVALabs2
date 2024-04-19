@@ -11,45 +11,44 @@ import java.util.Objects;
 import java.util.Random;
 
 public class UserFactory {
-    private static UserFactory INSTANCE;
-    private List<String[]> listOfNames;
-    private List<String[]> listOfSurnames;
-    private List<String[]> listOfTeacherSurnames;
+    private List<String[]> names;
+    private List<String[]> surnames;
+    private List<String[]> teachersSurnames;
 
 
-    private UserFactory() {
+    public UserFactory() {
         try {
-            listOfTeacherSurnames = CSVDataReader.readDataFromCSV(System.getProperty("user.dir") + "/src/Lab1/Data/professor_surnames.csv");
-            listOfNames = CSVDataReader.readDataFromCSV(System.getProperty("user.dir") + "/src/Lab1/Data/names.csv");
-            listOfSurnames = CSVDataReader.readDataFromCSV(System.getProperty("user.dir") + "/src/Lab1/Data/surnames.csv");
+            teachersSurnames = CSVDataReader.readDataFromCSV(System.getProperty("user.dir") + "/src/Lab1/Data/professor_surnames.csv");
+            names = CSVDataReader.readDataFromCSV(System.getProperty("user.dir") + "/src/Lab1/Data/names.csv");
+            surnames = CSVDataReader.readDataFromCSV(System.getProperty("user.dir") + "/src/Lab1/Data/surnames.csv");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static UserFactory getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new UserFactory();
-        }
-        return INSTANCE;
-    }
-
     public User createUser(String type) {
-        return switch (type) {
-            case "Teacher" -> createTeacher(listOfNames, listOfTeacherSurnames);
-            case "Student" -> createStudent(listOfNames, listOfSurnames);
-            default -> null;
-        };
+        User result = null;
+        switch (type) {
+            case "Teacher":
+                result = createTeacher(names, teachersSurnames);
+                break;
+            case "Student":
+                result = createStudent(names, surnames);
+                break;
+            default:
+                break;
+        }
+        return result;
     }
 
-    private User createTeacher(List<String[]> listOfNames, List<String[]> listOfSurnames) {
+    private User createTeacher(List<String[]> names, List<String[]> surnames) {
         Random r = new Random();
-        String[] name = listOfNames.get(r.nextInt(listOfNames.size() - 1));
-        String surname = listOfSurnames.get(r.nextInt(listOfSurnames.size() - 1))[0];
+        String[] name = names.get(r.nextInt(names.size() - 1));
+        String surname = surnames.get(r.nextInt(surnames.size() - 1))[0];
         String[] nameForPatronymics;
         String patronymics;
         do {
-            nameForPatronymics = listOfNames.get(r.nextInt(listOfNames.size() - 1));
+            nameForPatronymics = names.get(r.nextInt(names.size() - 1));
         } while (Objects.equals(nameForPatronymics[1], "F"));
         if (Objects.equals(name[1], "F")) {
             if (checkSurname(surname)) surname = surname + "а";
@@ -62,10 +61,10 @@ public class UserFactory {
         return !surname.endsWith("о") && !surname.endsWith("ь");
     }
 
-    private User createStudent(List<String[]> listOfNames, List<String[]> listOfSurnames) {
+    private User createStudent(List<String[]> names, List<String[]> surnames) {
         Random r = new Random();
-        String[] name = listOfNames.get(r.nextInt(listOfNames.size() - 1));
-        String surname = listOfSurnames.get(r.nextInt(listOfSurnames.size() - 1))[0];
+        String[] name = names.get(r.nextInt(names.size() - 1));
+        String surname = surnames.get(r.nextInt(surnames.size() - 1))[0];
         if (Objects.equals(name[1], "F")) surname = surname + "а";
         return new Student(name[0], surname);
     }
